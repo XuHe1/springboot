@@ -37,7 +37,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-redis')
 	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1')
 	compile('org.springframework.boot:spring-boot-starter-validation')
-
+	compile('mysql:mysql-connector-java:5.1.38')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	//enable restart by build or change classpath resource (src/main/resources)
@@ -45,8 +45,8 @@ dependencies {
 	// executable jar
 	compile("org.springframework.boot:spring-boot-starter-actuator")
 
-	// Database
-	compile('mysql:mysql-connector-java:5.1.38')
+
+
 
 
 }

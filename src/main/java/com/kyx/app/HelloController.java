@@ -1,7 +1,6 @@
 package com.kyx.app;
 
 import com.kyx.app.bean.User;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by kaiitsugyou on 16/12/27.
  */
 @RestController
-@EnableAutoConfiguration
 @RequestMapping(path = "/app")
 public class HelloController {
     @RequestMapping("/home")
