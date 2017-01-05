@@ -2,7 +2,7 @@ name: app
 version: 1.0.0
 
 server:
-  port: 8080
+  port: 8081
 
 # the current active profile : dev
 spring:
@@ -15,7 +15,7 @@ spring:
   profiles: dev
   devtools:
     restart:
-      enabled: true
+      enabled: true #default is true
 
 
 dataSource:
@@ -34,6 +34,11 @@ dataSource:
   prepStmtCacheSqlLimit: 2048
   useServerPrepStmts: true
 
+mybatis:
+    type-aliases-package: com.kyx.app.bean
+    mapper-locations: classpath*:mapper/*Mapper.xml
+    #mapper-locations: classpath*:*Mapper.xml
+
 
 ---
 
@@ -49,10 +54,6 @@ logging:
   level:
     com.kyx.app: DEBUG
 
-
-mybatis:
-    type-aliases-package: com.kyx.app.domain
-    mapper-locations: classpath:mapper/*.xml
 
 
 

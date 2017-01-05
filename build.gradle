@@ -17,6 +17,7 @@ apply plugin: 'org.springframework.boot'
 
 
 bootRun {
+	//  resources (src/main/resources by default) are reloadable
 	addResources = true
 }
 
@@ -31,12 +32,16 @@ repositories {
 	mavenCentral()
 }
 
+configurations{
+	mybatisGenerator
+}
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-amqp')
 	compile('org.springframework.boot:spring-boot-starter-data-redis')
 	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1')
 	compile('org.springframework.boot:spring-boot-starter-validation')
+	compile('com.zaxxer:HikariCP:2.4.6')
 	compile('mysql:mysql-connector-java:5.1.38')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
@@ -45,8 +50,35 @@ dependencies {
 	// executable jar
 	compile("org.springframework.boot:spring-boot-starter-actuator")
 
+	mybatisGenerator 'org.mybatis.generator:mybatis-generator-core:1.3.2'
+	mybatisGenerator 'mysql:mysql-connector-java:5.1.38'
 
 
+}
 
 
+task hello(type: GreetingTask)
+
+task helloTo(type: GreetingTask){
+	greeting = "hello James."
+}
+class GreetingTask extends DefaultTask {
+	String greeting = "hello world!"
+	@TaskAction
+	def greet() {
+		println classpath:
+
+		ant.echo(greeting)
+	}
+}
+
+task mybatisGenerate << {
+	ant.taskdef(
+			name: 'mbgenerator',
+			classname: 'org.mybatis.generator.ant.GeneratorAntTask',
+			classpath: configurations.mybatisGenerator.asPath)
+	ant.mbgenerator(
+			overwrite: true,
+			configfile: 'src/main/resources/mbg.xml',
+			verbose: true)
 }
