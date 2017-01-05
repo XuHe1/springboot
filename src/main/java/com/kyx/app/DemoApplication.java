@@ -8,7 +8,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -29,10 +28,10 @@ public class DemoApplication {
 	@Autowired
 	private AppConf appConf;
 
-	@Value("${mybatis.mapperLocations}")
-	private String mapperLocations;
-	@Value("${mybatis.typeAliasPackage}")
-	private String typeAliasPackage;
+//	@Value("${mybatis.mapperLocations}")
+//	private String mapperLocations;
+//	@Value("${mybatis.typeAliasPackage}")
+//	private String typeAliasPackage;
 
 //	@Bean
 //	public FilterRegistrationBean get() {
@@ -53,7 +52,7 @@ public class DemoApplication {
 //		return  sessionFilter;
 //	}
 	@Bean
-	@ConfigurationProperties(prefix = "dataSource")
+	@ConfigurationProperties(prefix = "spring.dataSource")
 	public DataSource dataSource(){
 		return new HikariDataSource();
 	}
@@ -64,8 +63,8 @@ public class DemoApplication {
 			SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 			sessionFactory.setDataSource(dataSource());
 			// 使用xml,必须
-			logger.info("=======>application.properties: {}",mapperLocations);
-			logger.info("=======>application.properties: {}",typeAliasPackage);
+//			logger.info("=======>application.properties: {}",mapperLocations);
+//			logger.info("=======>application.properties: {}",typeAliasPackage);
 
 			sessionFactory.setTypeAliasesPackage(appConf.getTypeAliasPackage());
 			sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(appConf.getMapperLocations()));

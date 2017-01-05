@@ -4,6 +4,16 @@ version: 1.0.0
 server:
   port: 8080
 
+
+mybatis:
+        #type-aliases-package: com.kyx.app.bean
+        #mapper-locations: classpath*:mapper/*Mapper.xml
+        #mapper-locations: classpath*:*Mapper.xml
+        typeAliasPackage: com.kyx.app.bean
+        mapperLocations: classpath*:mapper/*Mapper.xml
+
+
+
 # the current active profile : dev
 spring:
   profiles.active: dev
@@ -17,7 +27,9 @@ spring:
     restart:
       enabled: true #default is true
 
-
+# 根据具体使用的第三方数据源设置
+# 不缩进@ConfigurationProperties(prefix = "dataSource")
+# 缩进：@ConfigurationProperties(prefix = "spring.dataSource")
   dataSource:
     driverClassName: com.mysql.jdbc.Driver
     jdbcUrl: jdbc:mysql://localhost:3306/material?useUnicode=true&characterEncoding=UTF-8
@@ -34,6 +46,12 @@ spring:
     prepStmtCacheSqlLimit: 2048
     useServerPrepStmts: true
 
+
+
+logging:
+  level:
+    com.kyx.app: DEBUG
+
 ---
 
 # if profiles is test , the datasource does't need  to be configured
@@ -41,21 +59,11 @@ spring:
   profiles: test
 
 
-
-mybatis:
-    #type-aliases-package: com.kyx.app.bean
-    #mapper-locations: classpath*:mapper/*Mapper.xml
-    #mapper-locations: classpath*:*Mapper.xml
-    typeAliasPackage: com.kyx.app.bean
-    mapperLocations: classpath*:mapper/*Mapper.xml
-
 logging:
   level:
-    com.kyx.app: DEBUG
+    com.kyx.app: ERROR
 
 
-flyway:
-  enabled: ${flyware-enabled:false}
 
 
 

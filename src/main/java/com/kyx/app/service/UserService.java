@@ -32,7 +32,7 @@ public class UserService {
             throw new RuntimeException("throw a exception!!");
         }catch (Exception e){
             System.out.println("service: catch a exception");
-         //   throw e;//must throw ,otherwise the transaction can't rollback.
+            throw e;//must throw ,otherwise the transaction can't rollback.
         }
 
 //        User u = user;
