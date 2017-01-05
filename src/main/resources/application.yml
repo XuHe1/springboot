@@ -34,15 +34,6 @@ spring:
     prepStmtCacheSqlLimit: 2048
     useServerPrepStmts: true
 
-mybatis:
-    #type-aliases-package: com.kyx.app.bean
-    #mapper-locations: classpath*:mapper/*Mapper.xml
-    #mapper-locations: classpath*:*Mapper.xml
-    typeAliasPackage: com.kyx.app.bean
-    mapperLocations: classpath*:mapper/*Mapper.xml
-
-
-
 ---
 
 # if profiles is test , the datasource does't need  to be configured
@@ -50,12 +41,23 @@ spring:
   profiles: test
 
 
-flyway:
-  enabled: ${flyware-enabled:false}
+
+mybatis:
+    #type-aliases-package: com.kyx.app.bean
+    #mapper-locations: classpath*:mapper/*Mapper.xml
+    #mapper-locations: classpath*:*Mapper.xml
+    typeAliasPackage: com.kyx.app.bean
+    mapperLocations: classpath*:mapper/*Mapper.xml
 
 logging:
   level:
     com.kyx.app: DEBUG
+
+
+flyway:
+  enabled: ${flyware-enabled:false}
+
+
 
 
 

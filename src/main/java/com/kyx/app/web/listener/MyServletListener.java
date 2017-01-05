@@ -1,5 +1,9 @@
 package com.kyx.app.web.listener;
 
+import com.kyx.app.web.servlet.MyServlet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -9,9 +13,10 @@ import javax.servlet.annotation.WebListener;
  */
 @WebListener
 public class MyServletListener implements ServletContextListener {
+    Logger logger = LoggerFactory.getLogger(MyServlet.class);
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        System.out.println("================>context init.....");
+        logger.info("================>context init.....");
     }
 
     @Override

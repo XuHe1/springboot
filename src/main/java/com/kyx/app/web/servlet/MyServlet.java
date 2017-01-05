@@ -1,5 +1,9 @@
 package com.kyx.app.web.servlet;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +16,12 @@ import java.io.IOException;
  */
 @WebServlet(urlPatterns = "/lottery/go")
 public class MyServlet extends HttpServlet {
+    Logger logger = LoggerFactory.getLogger(MyServlet.class);
     @Override
     public void init() throws ServletException {
         super.init();
-        System.out.println("===========>servlet init......");
+        logger.info("===========>servlet init......");
+
     }
 
     @Override
@@ -25,6 +31,6 @@ public class MyServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("========>MyServlet");
+        logger.info("===========>doPost");
     }
 }
