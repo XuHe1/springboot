@@ -1,9 +1,12 @@
 package com.kyx.app;
 
+import com.kyx.app.spring.conf.AppConf;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -18,6 +21,13 @@ import javax.sql.DataSource;
 @ServletComponentScan
 @MapperScan(basePackages = "com.kyx.app.mybatis.mapper")
 public class DemoApplication {
+	@Autowired
+	private AppConf appConf;
+
+	@Value("${mybatis.mapperLocations}")
+	private String mapperLocations;
+	@Value("${mybatis.typeAliasPackage}")
+	private String typeAliasPackage;
 
 //	@Bean
 //	public FilterRegistrationBean get() {
@@ -45,13 +55,14 @@ public class DemoApplication {
 
 
 	@Bean
-	@ConfigurationProperties(prefix = "mybatis")
 	public SqlSessionFactory sqlSessionFactory() throws Exception{
 			SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 			sessionFactory.setDataSource(dataSource());
 			// 使用xml,必须
-			sessionFactory.setTypeAliasesPackage("com.kyx.app.bean");
-			sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*Mapper.xml"));
+			System.out.println("application.properties: "+mapperLocations);
+			System.out.println("application.properties: "+typeAliasPackage);
+			sessionFactory.setTypeAliasesPackage(appConf.getTypeAliasPackage());
+			sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(appConf.getMapperLocations()));
 			return sessionFactory.getObject();
 	}
 
