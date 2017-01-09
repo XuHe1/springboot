@@ -85,7 +85,18 @@ public class DemoApplication {
 //		sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(appConf.getMapperLocations()));
 //		return sessionFactory.getObject();
 //	}
-
+//
+//	@Bean
+//	public SqlSessionDaoSupport sqlSessionDaoSupport(SqlSessionFactory sqlSessionFactory){
+//		System.out.println(sqlSessionFactory);
+//		SqlSessionDaoSupport sqlSessionDaoSupport = new SqlSessionDaoSupport() {
+//			@Override
+//			public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+//				super.setSqlSessionFactory(sqlSessionFactory);
+//			}
+//		};
+//		return sqlSessionDaoSupport;
+//	}
 
 	@Bean
 	public TestSpringSource setVersion(){
@@ -97,6 +108,7 @@ public class DemoApplication {
 			//System.setProperty("spring.devtools.restart.enabled", "true");
 //			TestSpringSource test = new TestSpringSource();
 //			test.setVersion("1.0");
+			//SpringApplication.run("classpath:applicationContext.xml", args);
 			SpringApplication.run(DemoApplication.class, args);
 	}
 }
